@@ -4,17 +4,9 @@
  * This manages the entire front-end website.
  */
 
-// The API we're using for grabbing metadata about each cryptocurrency
-// (including logo images). The service can be found at:
-// https://www.cryptocompare.com/api/
-let CRYPTOCOMPARE_API_URI = "https://www.cryptocompare.com";
-
-// The API we're using for grabbing cryptocurrency prices.  The service can be
-// found at: https://coinmarketcap.com/api/
+// The API for grabbing cryptocurrency prices.
 let COINMARKETCAP_API_URI = "https://api.coinmarketcap.com";
 
-// The amount of milliseconds (ms) after which we should update our currency
-// charts.
 let UPDATE_INTERVAL = 60 * 1000;
 
 let app = new Vue({
@@ -26,8 +18,7 @@ let app = new Vue({
   methods: {
 
     /**
-     * Load up all cryptocurrency data.  This data is used to find what logos
-     * each currency has, so we can display things in a friendly way.
+     * Load up all cryptocurrency data.
      */
     getCoinData: function() {
       let self = this;
@@ -44,8 +35,7 @@ let app = new Vue({
     },
 
     /**
-     * Get the top 10 cryptocurrencies by value.  This data is refreshed each 5
-     * minutes by the backing API service.
+     * Get the top 10 cryptocurrencies by value.
      */
     getCoins: function() {
       let self = this;
@@ -65,11 +55,6 @@ let app = new Vue({
      */
     getCoinImage: function(symbol) {
 
-      // These two symbols don't match up across API services. I'm manually
-      // replacing these here so I can find the correct image for the currency.
-      //
-      // In the future, it would be nice to find a more generic way of searching
-      // for currency images
       symbol = (symbol === "MIOTA" ? "IOT" : symbol);
       symbol = (symbol === "VERI" ? "VRM" : symbol);
 
@@ -86,7 +71,7 @@ let app = new Vue({
   },
 
   /**
-   * Using this lifecycle hook, we'll populate all of the cryptocurrency data as
+   * Using this lifecycle hook, populate all of the cryptocurrency data as
    * soon as the page is loaded a single time.
    */
   created: function () {
